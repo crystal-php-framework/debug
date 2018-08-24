@@ -62,6 +62,8 @@ class Debugger implements DebuggerInterface
      *
      * @param array $settings An array of internal php configuration settings to change.
      *
+     * @throws Exception\RuntimeException If the current setting change could not be done.
+     *
      * @return void Returns nothing.
      */
     public function setConfig(array $settings = []): void
@@ -77,6 +79,8 @@ class Debugger implements DebuggerInterface
      * Run basic development or production operations.
      *
      * @param string $env The environemt the system should run under.
+     *
+     * @throws Exception\InvalidOperationException If an unknown environment is causing a break in the debugger.
      *
      * @return void Returns nothing.
      */
@@ -94,9 +98,11 @@ class Debugger implements DebuggerInterface
         if ($env === 'production') {
             $this->setConfig($this->basicProdConfig);
             error_reporting(E_ALL);
-        } else {
+        } elseif ($env === 'development') {
             $this->setConfig($this->basicDevConfig);
             error_reporting(0);
+        } else {
+            throw new Exception\InvalidOperationException('An unknown environment is causing a break in the debugger.');
         }
     }
 
