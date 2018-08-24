@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Crystal\Debug\Exception;
 
-use RuntimeException;
-
 /**
  * This exception is thrown when the requestion operation could not run.
  */
