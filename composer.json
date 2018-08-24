@@ -1,2 +1,27 @@
 {
+    "name": "crystal-php-framework/debug",
+    "description": "",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Nicholas E.",
+            "email": "isupozoy@gmail.com",
+            "homepage": "https://github.com/isupozoy",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "symfony/options-resolver": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crystal\\Debug\\": "./src"
+        }
+    }
 }
