@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 /**
- * Debugging could not be easy without the awesome crystal debugging component.
+ * Debugging component from crystal framework.
  *
  * @author  Nicholas English <isupozoy@gmail.com>.
  * @license <https://github.com/crystal-php-framework/debug/blob/master/LICENSE> MIT License.
