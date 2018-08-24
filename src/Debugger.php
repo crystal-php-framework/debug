@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Crystal\Debug;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use const null;
 
 use function set_exception_handler;
@@ -22,7 +24,6 @@ use function ini_set;
  */
 class Debugger implements DebuggerInterface
 {
-    use ConvertEnvTrait;
 
     /** @var array The basic prooduction settings. */
     private $basicProdConfig = [
@@ -81,7 +82,16 @@ class Debugger implements DebuggerInterface
      */
     public function run($env = 'production'): void
     {
-        if ($this->convert($env)) {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            'env' => 'production'
+        ]);
+        $resolver->setAllowedValues('env', [
+            'production',
+            'development'
+        ]);
+        $env = $resolver->resolve($env);
+        if ($env === 'production') {
             $this->setConfig($this->basicProdConfig);
             error_reporting(E_ALL);
         } else {
