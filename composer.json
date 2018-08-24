@@ -1,6 +1,6 @@
 {
     "name": "crystal-php-framework/debug",
-    "description": "",
+    "description": "Debugging component from crystal framework.",
     "license": "MIT",
     "type": "library",
     "keywords": [],
