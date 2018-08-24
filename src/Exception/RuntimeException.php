@@ -13,7 +13,7 @@ namespace Crystal\Debug\Exception;
 use RuntimeException;
 
 /**
- * This exception is thrown when the requestion operation could not run.
+ * This exception is thrown when the debugger is not running properly.
  */
 class RuntimeException extends RuntimeException implements ExceptionInterface
 {
