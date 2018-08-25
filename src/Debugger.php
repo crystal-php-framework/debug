@@ -13,6 +13,8 @@ namespace Crystal\Debug;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use const null;
+use const true;
+use const false;
 
 use function set_exception_handler;
 use function set_error_handler;
@@ -24,6 +26,12 @@ use function ini_set;
  */
 class Debugger implements DebuggerInterface
 {
+
+    /** @var bool Are we running in development. */
+    private $isDevelopment = null;
+
+    /** @var bool Are we running in production. */
+    private $isProduction = null;
 
     /** @var array The basic prooduction settings. */
     private $basicProdConfig = [
@@ -54,7 +62,7 @@ class Debugger implements DebuggerInterface
     public function __construct(ExceptionHandlerInterface $exceptionHandler = null, ErrorHandlerInterface $errorHandler = null)
     {
         $this->exceptionHandler = $exceptionHandler;
-        $this->errorHandler     = $errorHandler;
+        $this->errorHandler = $errorHandler;
     }
 
     /**
@@ -98,9 +106,13 @@ class Debugger implements DebuggerInterface
         if ($env === 'production') {
             $this->setConfig($this->basicProdConfig);
             error_reporting(E_ALL);
+            $this->isDevelopment = false;
+            $this->isProduction = true;
         } elseif ($env === 'development') {
             $this->setConfig($this->basicDevConfig);
             error_reporting(0);
+            $this->isDevelopment = true;
+            $this->isProduction = false;
         } else {
             throw new Exception\InvalidOperationException('An unknown environment is causing a break in the debugger.');
         }
